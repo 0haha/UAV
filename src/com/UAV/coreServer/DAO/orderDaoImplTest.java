@@ -4,9 +4,12 @@ import static org.junit.Assert.*;
 
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import org.junit.Test;
 
+import com.UAV.coreServer.Utility.constant;
+import com.UAV.coreServer.model.Operator;
 import com.UAV.coreServer.model.Order;
 
 public class orderDaoImplTest {
@@ -26,7 +29,7 @@ public class orderDaoImplTest {
 		orderDaoImpl oai=new orderDaoImpl();
 		try{
 			//test save()
-			System.out.println(oai.save(o));
+			//System.out.println(oai.save(o));
 				
 		    //test findAll()		
 			/*Iterator it=oai.findAll().iterator();
@@ -40,6 +43,14 @@ public class orderDaoImplTest {
 			//test delete()
 			//oai.delete(o);
 			//oai.delete(3);
+			
+			//test change
+			oai.changeStatus(3, constant.commitedStatus);
+			List<Order> os=oai.findByStatus(constant.commitedStatus);
+			Iterator it2=os.iterator();
+			while(it2.hasNext()){
+				System.out.println("Status:"+((Order)it2.next()).getStatus());
+			}
 			}
 			catch(Exception e)
 			{

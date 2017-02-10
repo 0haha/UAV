@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.UAV.coreServer.db.connectionOp;
 import com.UAV.coreServer.model.Operator;
+import com.UAV.coreServer.model.Order;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
@@ -172,10 +173,59 @@ public class operatorDaoImpl implements operatorDao {
 		return Operators;
 	}
 
-	@Override
-	public List<Operator> findByOperatorId(int OperatorId) {
-		// TODO Auto-generated method stub
-		return null;
+	public void changeStatus(int id,int status)throws Exception{
+		String sql="update Operator set "
+				+"status="+String.valueOf(status)
+        		+" where id="+String.valueOf(id)
+        		+";";
+		Connection conn=connectionOp.getConnection();
+        PreparedStatement pstmt=(PreparedStatement) conn.prepareStatement(sql);
+	    pstmt.execute();
+	    pstmt.close();
+	    conn.close();
 	}
+	public List<Operator> findByStatus(int status)throws Exception{
+		List<Operator> Operators=new LinkedList<Operator>();
+		Connection conn = connectionOp.getConnection();
+	    String sql = "select * from Operator where status="+String.valueOf(status)+";";
+	    PreparedStatement pstmt;
+	    pstmt = (PreparedStatement)conn.prepareStatement(sql);
+	    ResultSet rs = pstmt.executeQuery();
+	    int col = rs.getMetaData().getColumnCount();
+	        
+	        while (rs.next()) {
+	        	Operator o=new Operator();
+	            for (int i = 1; i <= col; i++) {
+	                switch(i){
+	                	case 1:
+	                		o.setId(rs.getInt(1));break;
+	                	case 2:
+	                		o.setSex(rs.getInt(2));break;
+	                	case 3:
+	                		o.setName(rs.getString(3));break;
+	                	case 4:
+	                		o.setBirthday(rs.getString(4));break;
+	                	case 5:
+	                	    o.setWorktime(rs.getInt(5));break;
+	                	case 6:
+	                		o.setPhone(rs.getString(6));break;
+	                	case 7:
+	                		o.setAddress(rs.getString(7));break;
+	                	case 8:
+	                		o.setRange(rs.getDouble(8));break;
+	                	case 9:
+	                		o.setStatus(rs.getInt(9));break;
+	                }
+	                		
+	             }
+	            Operators.add(o);
+	            
+	        }
+	            
+	    
+		return Operators;
+	}
+	
+	
 
 }

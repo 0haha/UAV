@@ -2,6 +2,8 @@ package com.UAV.coreServer.model;
 
 import java.util.Date;
 
+import com.UAV.coreServer.Utility.constant;
+
 public class Operator {
   private int id;
   private int sex;
@@ -11,8 +13,15 @@ public class Operator {
   private String phone;
   private String address;
   private double range;
+  private int status=constant.defaultStatus;
   
   
+public int getStatus() {
+	return status;
+}
+public void setStatus(int status) {
+	this.status = status;
+}
 public int getSex() {
 	return sex;
 }

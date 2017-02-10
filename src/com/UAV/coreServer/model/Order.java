@@ -2,6 +2,8 @@ package com.UAV.coreServer.model;
 
 import java.util.Date;
 
+import com.UAV.coreServer.Utility.constant;
+
 public class Order {
 private int id;
 private String name;
@@ -13,6 +15,14 @@ private double price;
 private String workTime;
 private Date deadline;
 private String note;
+private int status=constant.defaultStatus;
+
+public int getStatus() {
+	return status;
+}
+public void setStatus(int status) {
+	this.status = status;
+}
 public int getId() {
 	return id;
 }

@@ -3,9 +3,11 @@ package com.UAV.coreServer.DAO;
 import static org.junit.Assert.*;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.junit.Test;
 
+import com.UAV.coreServer.Utility.constant;
 import com.UAV.coreServer.model.Operator;
 
 public class operatorDaoImplTest {
@@ -36,8 +38,16 @@ public class operatorDaoImplTest {
 		//o.update(2, operator);
 		
 		//test delete()
-		o.delete(operator);
+		//o.delete(operator);
 		//o.delete(3);
+			
+		//test change()
+		o.changeStatus(9, constant.commitedStatus);
+		List<Operator> os=o.findByStatus(constant.commitedStatus);
+		Iterator it2=os.iterator();
+		while(it2.hasNext()){
+			System.out.println("Status:"+((Operator)it2.next()).getStatus());
+		}
 		}
 		catch(Exception e)
 		{

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+   <bean id="operatorDao" class="com.UAV.coreServer.DAO.operatorDaoImpl"/>
+   <bean id="orderDao" class="com.UAV.coreServer.DAO.orderDaoImpl"/>
+   <bean id="quotationDao" class="com.UAV.coreServer.DAO.quotationDaoImpl"/>
+   <bean id="coreServerDB" class="com.UAV.coreServer.db.UAVcoreServerDB"/>
+   <bean id="orderService" class="com.UAV.coreServer.service.orderServiceImpl">
+     <property name="ordao" ref="orderDao"/>
+     <property name="qudao" ref="quotationDao"/>
+     <property name="opdao" ref="operatorDao"/>
+     <property name="coreserver" ref="coreServerDB"/>
+   </bean> 
+   <bean id="operatorService" class="com.UAV.coreServer.service.operatorServiceImpl">
+     <property name="ordao" ref="orderDao"/>
+     <property name="qudao" ref="quotationDao"/>
+     <property name="opdao" ref="operatorDao"/>
+     <property name="coreserver" ref="coreServerDB"/>
+   </bean> 
+</beans>

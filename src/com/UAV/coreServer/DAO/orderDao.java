@@ -12,6 +12,6 @@ public interface orderDao {
 	void delete(Order Order) throws Exception;
 	void delete(int id)throws Exception;
 	List<Order> findAll() throws Exception;
-	List<Order> findByOrderId(int orderId);
-	
+	void changeStatus(int id,int status)throws Exception;
+	List<Order> findByStatus(int status)throws Exception;
 }

@@ -11,6 +11,6 @@ public interface quotationDao {
 	void update(int id,Quotation quotation)throws Exception;
 	void delete(Quotation quotation)throws Exception;
 	void delete(int id)throws Exception;
-	List<Quotation> findByOrderId(int orderId)throws Exception;
-	
+	List<Quotation> findByOperatorId(int orderId)throws Exception;
+	List<Quotation> findByOrderId(int orderId) throws Exception;
 }

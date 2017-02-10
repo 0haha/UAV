@@ -46,7 +46,7 @@ public class quotationDaoImpl implements quotationDao {
 		
 		
 		conn=connectionOp.getConnection();
-		String sql = "insert into quotation (id,orderId,price,usrid) values(?,?,?,?)";
+		String sql = "insert into quotation (id,orderId,price,operatorid) values(?,?,?,?)";
 		
 		
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
@@ -112,11 +112,11 @@ public class quotationDaoImpl implements quotationDao {
 	}
 
 	@Override
-	public List<Quotation> findByOrderId(int orderid) throws Exception{
+	public List<Quotation> findByOperatorId(int operatorid) throws Exception{
 		// TODO Auto-generated method stub
 		List<Quotation> quotations=new LinkedList<Quotation>();
 		Connection conn = connectionOp.getConnection();
-	    String sql = "select * from quotation where orderid="+String.valueOf(orderid)+";";
+	    String sql = "select * from quotation where usrid="+String.valueOf(operatorid)+";";
 	    PreparedStatement pstmt;
 	    pstmt = (PreparedStatement)conn.prepareStatement(sql);
 	    ResultSet rs = pstmt.executeQuery();
@@ -129,9 +129,9 @@ public class quotationDaoImpl implements quotationDao {
 	                	case 1:
 	                		o.setId(rs.getInt(1));break;
 	                	case 2:
-	                		o.setUsrId(rs.getInt(2));
+	                		o.setUsrId(rs.getInt(2));break;
 	                	case 3:
-	                		o.setOrderId(orderid);break;
+	                		o.setOrderId(rs.getInt(3));break;
 	                	case 4:
 	                		o.setPrice(rs.getDouble(4));break;
 	                	
@@ -146,6 +146,38 @@ public class quotationDaoImpl implements quotationDao {
 		return quotations;
 	}
 
-	
+	public List<Quotation> findByOrderId(int orderId) throws Exception{
+		// TODO Auto-generated method stub
+				List<Quotation> quotations=new LinkedList<Quotation>();
+				Connection conn = connectionOp.getConnection();
+			    String sql = "select * from quotation where orderid="+String.valueOf(orderId)+";";
+			    PreparedStatement pstmt;
+			    pstmt = (PreparedStatement)conn.prepareStatement(sql);
+			    ResultSet rs = pstmt.executeQuery();
+			    int col = rs.getMetaData().getColumnCount();
+			        
+			        while (rs.next()) {
+			        	Quotation o=new Quotation();
+			            for (int i = 1; i <= col; i++) {
+			                switch(i){
+			                	case 1:
+			                		o.setId(rs.getInt(1));break;
+			                	case 2:
+			                		o.setUsrId(rs.getInt(2));break;
+			                	case 3:
+			                		o.setOrderId(rs.getInt(3));break;
+			                	case 4:
+			                		o.setPrice(rs.getDouble(4));break;
+			                	
+			                }
+			                		
+			             }
+			            quotations.add(o);
+			            
+			        }
+			            
+			    
+				return quotations;
+	}
 
 }

@@ -86,6 +86,7 @@ public class orderDaoImpl implements orderDao {
 	@Override
 	public void update(int id,Order Order) throws Exception{
 		// TODO Auto-generated method stub
+		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String sql="update orders set "
 				+"name='"+Order.getName()
@@ -187,10 +188,63 @@ public class orderDaoImpl implements orderDao {
 		return Orders;
 	}
 
-	@Override
-	public List<Order> findByOrderId(int orderId) {
-		// TODO Auto-generated method stub
-		return null;
+	public void changeStatus(int id,int status)throws Exception{
+		
+		String sql="update orders set "
+				+"status='"+String.valueOf(status)
+        		+"' where id="+String.valueOf(id)
+        		+";";
+		Connection conn=connectionOp.getConnection();
+        PreparedStatement pstmt=(PreparedStatement) conn.prepareStatement(sql);
+	    pstmt.execute();
+	    pstmt.close();
+	    conn.close();
+	}
+	public List<Order> findByStatus(int status)throws Exception{
+		List<Order> Orders=new LinkedList<Order>();
+		Connection conn = connectionOp.getConnection();
+	    String sql = "select * from orders where status="+String.valueOf(status)+";";
+	    PreparedStatement pstmt;
+	    pstmt = (PreparedStatement)conn.prepareStatement(sql);
+	    ResultSet rs = pstmt.executeQuery();
+	    int col = rs.getMetaData().getColumnCount();
+	        
+	        while (rs.next()) {
+	        	Order o=new Order();
+	            for (int i = 1; i <= col; i++) {
+	                switch(i){
+	                	case 1:
+	                		o.setId(rs.getInt(1));break;
+	                	case 2:
+	                		o.setName(rs.getString(2));break;
+	                	case 3:
+	                		o.setPhone(rs.getString(3));;break;
+	                	case 4:
+	                		o.setRegion(rs.getString(4));;break;
+	                	case 5:
+	                	    o.setCrops(rs.getString(5));;break;
+	                	case 6:
+	                		o.setArea(rs.getString(6));;break;
+	                	case 7:
+	                		o.setPrice(rs.getDouble(7));break;
+	                	case 8:
+	                		o.setWorkTime(rs.getString(8));break;
+	                	case 9:
+	                		o.setDeadline(rs.getDate(9));break;
+	                	case 10:
+	                		o.setNote(rs.getString(10));break;
+	                	case 11:
+	                		o.setStatus(rs.getInt(11));break;
+	                		
+	                }
+	                		
+	             }
+	            Orders.add(o);
+	            
+	        }
+	            
+	    
+		return Orders;
 	}
 
 }

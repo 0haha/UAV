@@ -23,11 +23,11 @@ public class quotationDaoImplTest {
 		q.delete(1);
 		q.update(3,o);
 		q.delete(o);
-		List<Quotation> quotations=q.findByOrderId(1);
-		Iterator it=quotations.iterator();
-		while(it.hasNext()){
+		//List<Quotation> quotations=q.findByOrderId(1);
+		//Iterator it=quotations.iterator();
+		/*while(it.hasNext()){
 			System.out.println(((Quotation)it.next()).getPrice());
-		}
+		}*/
 		}
 		catch(Exception e){
 			e.printStackTrace();

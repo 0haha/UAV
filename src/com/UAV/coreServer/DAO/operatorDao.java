@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.UAV.coreServer.model.Operator;
+import com.UAV.coreServer.model.Order;
 
 public interface operatorDao {
 	
@@ -13,6 +14,6 @@ public interface operatorDao {
 	void delete(Operator Operator) throws Exception;
 	void delete(int id) throws Exception;
 	List<Operator> findAll() throws Exception;
-	List<Operator> findByOperatorId(int OperatorId);
-
+	void changeStatus(int id,int status)throws Exception;
+	List<Operator> findByStatus(int status)throws Exception;
 }
