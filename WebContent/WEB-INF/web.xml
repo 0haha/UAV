@@ -9,4 +9,12 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>ProcessingOrderServlet</servlet-name>
+    <servlet-class>com.UAV.coreServer.Controler.ProcessingOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProcessingOrderServlet</servlet-name>
+    <url-pattern>/*</url-pattern>
+  </servlet-mapping>
 </web-app>

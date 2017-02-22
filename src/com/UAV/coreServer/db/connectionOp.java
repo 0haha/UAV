@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import com.UAV.coreServer.Utility.constant;
 import com.mysql.jdbc.*;
-
+import com.mysql.jdbc.Driver;
 public class connectionOp {
   private static Connection conn=null;
   

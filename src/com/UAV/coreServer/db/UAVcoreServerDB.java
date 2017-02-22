@@ -150,13 +150,34 @@ public class UAVcoreServerDB {
 		String sql = "select * from order_usr where usrid="+String.valueOf(usrid)+";";
 		pstmt = (PreparedStatement) conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
+		
 		while(rs.next()){
 			orders_ids.add(rs.getInt(2));
+			
 		}
 		pstmt.close();
 	    conn.close();
 		return orders_ids;
 		
+		
+	}
+	
+	public int getOperatorIdByUsrId(int usrId)throws Exception{
+		
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			
+			
+			conn=connectionOp.getConnection();
+			String sql = "select * from operator_usr where usr_id="+String.valueOf(usrId)+";";
+			pstmt = (PreparedStatement) conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()){
+				int id=rs.getInt(2);
+				return id;
+			}else{
+				throw new Exception("get OperatorId error!");
+			}
 		
 	}
 }

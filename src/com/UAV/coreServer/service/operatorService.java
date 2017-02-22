@@ -16,22 +16,22 @@ public interface operatorService {
    
 	/*
 	 * a method used to get the orders which have not been released
-	 * @param operatorId the id of the operator
+	 * @param operatorId the id of the usr
 	 * @return 
 	 */
-	List<Order> getOrder(int operatorId)throws Exception;
+	List<Order> getOrder(int usrId);
 	/*
 	 * a method used to get the orders which have been modified
-	 * @param operatorId the id of the operator
+	 * @param operatorId the id of the usr
 	 * @return 
 	 */
-	List<Order> getModifyOrder(int operatorId)throws Exception;
+	List<Order> getModifyOrder(int usrId);
 	/*
 	 * a method used to get the id of the orders which have been deleted
-	 * @param operatorId the id of the operator
+	 * @param usrId the id of the operator
 	 * @return 
 	 */
-	List<Integer> getDelOrderId(int operatorId) throws Exception;
+	List<Integer> getDelOrderId(int usrId);
 	/*
 	 * a method used to quote a price and return the result 
 	 * @param the object of the quotation

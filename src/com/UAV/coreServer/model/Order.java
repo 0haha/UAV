@@ -15,13 +15,14 @@ private double price;
 private String workTime;
 private Date deadline;
 private String note;
-private int status=constant.defaultStatus;
+private double distance=constant.defaultDistance;
 
-public int getStatus() {
-	return status;
+
+public double getDistance() {
+	return distance;
 }
-public void setStatus(int status) {
-	this.status = status;
+public void setDistance(double distance) {
+	this.distance = distance;
 }
 public int getId() {
 	return id;

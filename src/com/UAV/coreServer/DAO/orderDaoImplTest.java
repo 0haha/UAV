@@ -49,7 +49,7 @@ public class orderDaoImplTest {
 			List<Order> os=oai.findByStatus(constant.commitedStatus);
 			Iterator it2=os.iterator();
 			while(it2.hasNext()){
-				System.out.println("Status:"+((Order)it2.next()).getStatus());
+				//System.out.println("Status:"+((Order)it2.next()).getStatus());
 			}
 			}
 			catch(Exception e)

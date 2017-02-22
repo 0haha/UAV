@@ -66,8 +66,6 @@ public class operatorServiceImpl implements operatorService, OpenOption {
 		
 		int id;
 		try{
-			
-			
 			id=opdao.save(operator);
 		}
 		catch(Exception e){
@@ -77,13 +75,16 @@ public class operatorServiceImpl implements operatorService, OpenOption {
 	}
 
 	@Override
-	public List<Order> getOrder(int operatorId) throws Exception {
+	public List<Order> getOrder(int usrId){
 		// TODO Auto-generated method stub
 	    //In fact, change the address into coordination and calculate the distance at the localhost would help to increase the speed.  
+		try{
+		int operatorId = coreserver.getOperatorIdByUsrId(usrId);
 		Operator operator=opdao.get(operatorId);
 		String origin = operator.getAddress();
 		double range= operator.getRange();
 		List<Order> orders=new LinkedList<Order>();
+		
 		List<Order> ordersAll=ordao.findAll();
 		for(Order tmp: ordersAll){
 			String destination = tmp.getRegion();
@@ -91,6 +92,7 @@ public class operatorServiceImpl implements operatorService, OpenOption {
 			double distance=locationService.getDistance(locationService.getAddress(origin, destination));
 			if(range - distance >= 0){
 				coreserver.addOperatorGetOrder(operatorId, tmp.getId());
+				tmp.setDistance(distance);
 				orders.add(tmp);
 				
 			}
@@ -101,29 +103,57 @@ public class operatorServiceImpl implements operatorService, OpenOption {
 			
 		}
 		return orders;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
 	}
 
 	@Override
-	public List<Order> getModifyOrder(int operatorId) throws Exception {
+	public List<Order> getModifyOrder(int usrId)  {
 		// TODO Auto-generated method stub
+		try{
+		int operatorId = coreserver.getOperatorIdByUsrId(usrId);
 		List<Integer> ids= coreserver.getModifiedOrdersId(operatorId);
 		List<Order> orders=new LinkedList<Order>();
+		
 		for(int tmp:ids){
-			Order o=ordao.get(tmp);
+			Order or=ordao.get(tmp);
+			Operator op = opdao.get(operatorId);
+			
+			double distance = 0.0;
+			distance=locationService.getDistance(locationService.getAddress(op.getAddress(),or.getRegion() ));
+			
+			or.setDistance(distance);
+			
 			System.out.println(tmp);
-			orders.add(o);
+			orders.add(or);
 			coreserver.changeStatus(tmp, constant.defaultStatus);
 		}
 		return orders;
-       
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
-	public List<Integer> getDelOrderId(int operatorId) throws Exception {
+	public List<Integer> getDelOrderId(int usrId){
 		// TODO Auto-generated method stub
-		List<Integer> ids= coreserver.getDeletedOrdersId(operatorId);
+		List<Integer> ids=new LinkedList<Integer>();
+		ids=null;
+		try{
+		int operatorId = coreserver.getOperatorIdByUsrId(usrId);
+	    ids= coreserver.getDeletedOrdersId(operatorId);
+	    return ids;
+		}
+		catch(Exception e){
+			return null;
+		}
 	    // coreserver.clearDeletedOrders(operatorId);
-		return ids;
+		
 	}
 
 	@Override

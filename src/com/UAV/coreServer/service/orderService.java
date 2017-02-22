@@ -33,5 +33,12 @@ public interface orderService {
 		 */
 	 List<Quotation> getQuotation(int usrId) throws Exception;
 	 
+	 /*
+		 * A method used to get the quotation by the usrId and operatorId
+		 * @param all the usrId and the operatorId
+		 * @return the quotation 
+		 */
+	 Quotation getQuotationByUsrIdAndOperator(int usrId,int operatorId)throws Exception;
+	 
 	 List<Operator> getOerator(int usrId) throws Exception;
 }

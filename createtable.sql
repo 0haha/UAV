@@ -70,8 +70,33 @@ CREATE TABLE `operator_order` (
 
 LOCK TABLES `operator_order` WRITE;
 /*!40000 ALTER TABLE `operator_order` DISABLE KEYS */;
-INSERT INTO `operator_order` VALUES (1,1,1,0),(2,2,1,0);
+INSERT INTO `operator_order` VALUES (1,1,1,2),(2,2,1,2);
 /*!40000 ALTER TABLE `operator_order` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `operator_usr`
+--
+
+DROP TABLE IF EXISTS `operator_usr`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `operator_usr` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `operator_id` int(11) DEFAULT NULL,
+  `usr_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `operator_usr`
+--
+
+LOCK TABLES `operator_usr` WRITE;
+/*!40000 ALTER TABLE `operator_usr` DISABLE KEYS */;
+INSERT INTO `operator_usr` VALUES (1,2,2);
+/*!40000 ALTER TABLE `operator_usr` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -116,7 +141,7 @@ CREATE TABLE `orders` (
   `crops` varchar(20) DEFAULT NULL,
   `area` int(11) DEFAULT NULL,
   `price` double(5,3) DEFAULT NULL,
-  `worktime` char(10) DEFAULT NULL,
+  `worktime` char(30) DEFAULT NULL,
   `deadline` date DEFAULT NULL,
   `note` varchar(50) DEFAULT NULL,
   `status` int(11) DEFAULT '0',
@@ -173,4 +198,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-09  0:08:42
+-- Dump completed on 2017-02-21  0:07:41

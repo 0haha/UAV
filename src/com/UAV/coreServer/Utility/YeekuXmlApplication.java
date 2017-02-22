@@ -19,10 +19,17 @@ public  class YeekuXmlApplication implements ApplicationContext{
 		File directory = new File("YeekuXmlApplication.java");//设定为当前文件夹 
 		String path=null;
 		try{ 
-		    String pathtmp=ContextTest.class.getClass().getResource("/").getPath();
-		 path=pathtmp.replace("build/classes/", constant.beanXmlRePath);
-			System.out.println(path);
-		}catch(Exception e){throw new Exception("error");} 
+		    //To get the file path about the project which is not about web 
+			//String pathtmp=ContextTest.class.getClass().getResource("/").getPath();
+		    //System.out.println(pathtmp);
+		    // path=pathtmp.replace("build/classes/", constant.beanXmlRePath);
+		    // System.out.println(path);
+			
+			String pathtmp=Thread.currentThread().getContextClassLoader().getResource("/").getPath();
+			System.out.println(pathtmp);
+			path=pathtmp.replace("classes/", "bean.xml");
+			
+		}catch(Exception e){e.printStackTrace();throw new Exception("error");} 
 		SAXReader reader=new SAXReader();
 		doc=reader.read(new File(path));
 		root = doc.getRootElement();

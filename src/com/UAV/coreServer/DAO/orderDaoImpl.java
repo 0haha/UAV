@@ -233,8 +233,7 @@ public class orderDaoImpl implements orderDao {
 	                		o.setDeadline(rs.getDate(9));break;
 	                	case 10:
 	                		o.setNote(rs.getString(10));break;
-	                	case 11:
-	                		o.setStatus(rs.getInt(11));break;
+	                	
 	                		
 	                }
 	                		

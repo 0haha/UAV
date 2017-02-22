@@ -18,5 +18,5 @@ public class constant {
   public static final String ip="http://api.map.baidu.com/direction/v1/routematrix";
   public static final String ak="8jUO4WfBwXeFF7SkDa63XPy0NoHBG9aC";
  
-  
+  public static final int defaultDistance=1000;
 }

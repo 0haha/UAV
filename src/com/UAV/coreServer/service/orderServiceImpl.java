@@ -23,11 +23,14 @@ import com.UAV.coreServer.model.Order;
 import com.UAV.coreServer.model.Quotation;
 
 public class orderServiceImpl implements orderService{
+//private orderDao ordao=new orderDaoImpl();
+//private quotationDao qudao=new quotationDaoImpl();
+//private operatorDao opdao=new operatorDaoImpl();
+//private UAVcoreServerDB coreserver=new UAVcoreServerDB();
 private orderDao ordao;
 private quotationDao qudao;
 private operatorDao opdao;
 private UAVcoreServerDB coreserver;
-
 
 public orderDao getOrdao() {
 	return ordao;
@@ -141,6 +144,16 @@ public void setCoreserver(UAVcoreServerDB coreserver) {
 		return operators;
 	}
 	 
-	
+	public Quotation getQuotationByUsrIdAndOperator(int usrId,int operatorId)throws Exception{
+		
+		List<Quotation> quotations = getQuotation(usrId);
+		Quotation q=new Quotation();
+		for(Quotation tmp:quotations){
+			if(tmp.getUsrId()==operatorId)
+				q=tmp;
+		}
+		return q;
+		
+	}
 
 }

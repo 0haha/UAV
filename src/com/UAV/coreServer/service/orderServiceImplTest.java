@@ -44,7 +44,11 @@ public class orderServiceImplTest {
 	    	}*/
 	    	List<Operator> operators=oi.getOerator(1);
 	    	for(Operator tmp:operators){
-	    		System.out.println(tmp.getName());
+	    		System.out.println("name:"+tmp.getName()+" address:"+tmp.getAddress());
+	    		System.out.println("birthday:"+tmp.getBirthday()+" phone:"+tmp.getPhone());
+	    		System.out.println("range:"+tmp.getRange()+" sex:"+tmp.getSex());
+	    		System.out.println("status:"+tmp.getStatus()+" worktime:"+tmp.getWorktime());
+	    		System.out.println("id:"+tmp.getId());
 	    	}
 	    }
 	    catch(Exception e){
